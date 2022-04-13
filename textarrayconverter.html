@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TextArray Converter!</title>
+</head>
+<body>
+        <input type="text" id="TextToConvert">
+        <input type="button" value="Convert to Array!" onclick="ConvertToArray()">
+        <input type="button" value="Convert to Text!" onclick="ConvertToText()">
+        <br><br>
+        <div id="output"></div>
+    <script type="text/javascript">
+        function ConvertToArray(){
+            const ToConvert = document.getElementById("TextToConvert").value;
+            let OutputString = '[';
+            let WordStart = true;
+            
+            for(let i=0;ToConvert[i];i++){
+                if(WordStart){
+                    OutputString+='"';
+                    WordStart = false;
+                }
+                if(ToConvert[i]!=" "){
+                    OutputString+=ToConvert[i];
+                }
+                else{
+                    OutputString+='",';
+                    WordStart = true;
+                }
+            }
+            OutputString+='"]';
+            document.getElementById("output").innerHTML = OutputString;
+        }
+        function ConvertToText(){
+            const ToConvert = document.getElementById("TextToConvert").value;
+            let OutputString = '';
+
+            for(let i=0;ToConvert[i];i++){
+                if(!(ToConvert[i].match(/[\"\'\[\]\,]/g))){
+                    OutputString+=ToConvert[i];
+                }
+                else{
+                    OutputString+=' ';
+                }
+            }
+            document.getElementById("output").innerHTML = OutputString;
+        }
+    </script>
+</body>
+</html>
